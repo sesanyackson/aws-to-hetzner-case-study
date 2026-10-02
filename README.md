@@ -1,12 +1,12 @@
-# Cutting a production cloud bill by nearly three quarters
+# How I cut a production cloud bill by about 72%
 
-A sanitised case study of an AWS-to-Hetzner migration I led as the sole
-infrastructure owner of a UK SaaS platform, built from 38 months of AWS
-invoices and a full Hetzner inventory.
+This is a write-up of a migration from AWS to Hetzner that I ran as the
+infrastructure engineer at a UK SaaS. It's built from 38 months of AWS invoices
+and a full export of our Hetzner server inventory.
 
-The employer's name, absolute amounts, vendor quotes and server identifiers
-have been removed. Figures are **indexed to the baseline month = 100**, so the
-method and the proportions survive and no confidential spend is disclosed.
+I've taken out the company name, the actual dollar amounts, vendor quotes and
+server names. Everything is **indexed so the baseline month = 100**. You still
+get the method and the proportions, just not the confidential numbers.
 
 ---
 
@@ -18,12 +18,12 @@ method and the proportions survive and no confidential spend is disclosed.
 | Current — latest closed AWS invoice (2026-06) plus the whole Hetzner estate | 27.6 |
 | **Reduction** | **72%** |
 
-The internal report this comes from headlines about 76%. That figure left out
-three servers that were planned for deletion at the time. They have since been
-kept, so this write-up counts them, and the reduction is about **72%**. When
-the assumptions change, the number should change with them.
+The internal report I wrote at the time said about 76%. That version left out
+three servers we were planning to delete. We ended up keeping them, so I've
+counted them here, which brings it to about **72%**. If the assumptions change,
+the number has to change too.
 
-## Where the reduction came from
+## Where the saving came from
 
 Indexed to the same baseline (baseline total = 100):
 
@@ -90,13 +90,12 @@ AWS spend peaked in 2024-04, fell sharply through the second half of
 
 ## How the baseline was chosen
 
-The comparison was fixed before the conclusion, and the choices are stated
-openly because each one affects the result.
+I decided how to compare before I looked at the result. Each of these choices
+moves the number, so here they are.
 
-- **The baseline is the highest AWS invoice month.** That is the favourable
-  end of the range, and it is chosen because it is a real invoice rather than
-  a projection of what spend "would have become". It is stated here so a
-  reader can discount it.
+- **The baseline is the highest AWS invoice month.** That's the flattering end
+  of the range. I used it because it's a real invoice and not a guess about
+  what spend "would have become". If you'd rather discount it, now you can.
 - **Managed-service costs are current vendor quotes, held flat.** Neither
   managed service appears in the exported AWS invoices, so their quotes stand
   in for them. Where a quote was a range, the **lower end** is used.
@@ -107,15 +106,15 @@ openly because each one affects the result.
 
 ## What was deliberately excluded
 
-The cloud provider granted a material amount of promotional credit during the
-migration. **None of it is counted.** Credits lower the bill in the months they
-apply. They do not lower the cost base, they expire, and counting them would
-make the engineering look better than it was. The source report shows them on
-a separate line.
+AWS gave us a fair amount of promotional credit during the migration. **I
+don't count any of it.** Credits lower the bill for a few months and then
+expire. They don't lower the cost base, and counting them would make the
+engineering look better than it was. The source report has them on a separate
+line.
 
 ## What moved, and in what order
 
-Sequenced by risk rather than size, one piece at a time.
+I did this in order of risk, not size, one piece at a time.
 
 1. **Application compute and supporting services**, the largest share of spend
    and the least stateful, moved to owned servers behind a proxy with
@@ -130,9 +129,10 @@ Sequenced by risk rather than size, one piece at a time.
    every cutover had a reverse-replication rollback path. Built June 2026,
    final cutover July 2026.
 
-Before any production cutover, the smallest cluster was restored into a
-throwaway environment and the whole cutover rehearsed against real data,
-including deliberately injected failures, before the rehearsal counted as done.
+Before touching production I restored the smallest cluster into a throwaway
+environment and ran the whole cutover against real data, including some
+failures I injected on purpose. Only after that passed did we schedule the
+real one.
 
 ## Limits of the evidence
 
@@ -147,13 +147,11 @@ including deliberately injected failures, before the rehearsal counted as done.
 
 ## What I would do differently
 
-- **Tag resources by service and environment from the start.** This analysis
-  was rebuilt from exported invoices after the fact. It should have been a
-  dashboard.
-- **Give each service a cost budget and alert on it**, the same way we alert on
+- Tag resources by service and environment from day one. I rebuilt this from
+  exported invoices after the fact. It should have been a dashboard.
+- Give each service a cost budget and alert on it, the same way we alert on
   latency.
-- **Write down the cost of reversing each migration step**, not only the cost
-  of taking it.
+- Write down what it would cost to reverse each step, not just to take it.
 
 ---
 
