@@ -122,7 +122,7 @@ I did this in order of risk, not size, one piece at a time.
 2. **The vector database.** A managed cluster was replaced by a self-hosted
    three-node cluster with its own load balancing, monitoring and verified
    snapshot backups. Built January 2026, cut over in February. The platform is
-   published as [hetzner-qdrant-cluster](https://github.com/h4nz0x/hetzner-qdrant-cluster).
+   published as [hetzner-qdrant-cluster](https://github.com/sesanyackson/hetzner-qdrant-cluster).
 3. **The primary databases**, last because they carry the most risk. Five
    managed clusters moved onto self-hosted replica sets. The larger ones used
    continuous oplog replication, the two smallest used dump and restore, and
@@ -155,5 +155,5 @@ real one.
 
 ---
 
-*Oluwasesan Kayode Yackson — [github.com/h4nz0x](https://github.com/h4nz0x) ·
+*Oluwasesan Kayode Yackson — [github.com/sesanyackson](https://github.com/sesanyackson) ·
 [linkedin.com/in/yackson0031](https://www.linkedin.com/in/yackson0031)*
