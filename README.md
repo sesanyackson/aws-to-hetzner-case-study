@@ -155,5 +155,5 @@ real one.
 
 ---
 
-*Kyenshak David — [github.com/h4nz0x](https://github.com/h4nz0x) ·
-[linkedin.com/in/kyenshak](https://www.linkedin.com/in/kyenshak)*
+*Oluwasesan Kayode Yackson — [github.com/h4nz0x](https://github.com/h4nz0x) ·
+[linkedin.com/in/yackson0031](https://www.linkedin.com/in/yackson0031)*
